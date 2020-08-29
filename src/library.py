@@ -8,5 +8,3 @@ class library():
     def loadFile(self, filePath, marker):
         self.m_objs.extend(self.m_parser.loadFile(filePath,marker))
         print(self.m_objs)
-                    
-

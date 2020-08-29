@@ -1,9 +1,9 @@
-import yaml
 import re
 import logging
 import importlib.util
 import inspect
 import traceback
+import yaml
 
 def getConfigDictFromFile(path):
     if path is not None:
@@ -45,13 +45,6 @@ def findParseFunc(valueType):
         return stringParse
     else:
         return safeParse
-
-def getName(line):
-    tokens = line.split()   #split by whitespace
-    if len(tokens) > 1:
-        raw = tokens[1] #  [def, func(arg1):] -> func(arg1):
-        val = raw.split("(")[0]
-        return val.strip()
 
 
 class parser:
@@ -95,44 +88,6 @@ class parser:
                     specDict['args'] = inspect.getargspec(funcTupl[1])[0]
                     objs.append(specDict)
         return objs
-
-
-    """
-    def loadFileOld(self, filePath, marker):
-        inSpec = False
-        endSpec = False
-        specDict = {}
-        objs = []
-        with open(filePath, 'r') as f:
-            for line in f:
-                if "\"\"\"" in line:
-                    inSpec = not inSpec
-                elif inSpec:
-                    ident, val = self.handleMarkerLine(line, marker)
-                    
-                    if ident is not None and val is not None:
-                        if ident not in specDict:
-                            specDict[ident] = val
-                elif "class" in line:   #don't have to check if in spec as it's checked above
-                    specDict["type"] = "class"
-                    endSpec = True
-                elif "def" in line:
-                    specDict["type"] = "func"
-                    endSpec = True
-
-                if endSpec:
-                    if 'name' not in specDict:
-                        specDict['name'] = getName(line)
-                    if 'args' not in specDict:
-                        #specDict['args'] = getArgs(line)
-                        pass
-                    objs.append(specDict)
-                    specDict = {}
-                    endSpec = False
-                
-        return objs
-    """
-
 
     def handleMarkerLine(self, line, marker):
         index = line.find(marker)   #find where marker is if any
