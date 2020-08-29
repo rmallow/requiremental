@@ -1,0 +1,10 @@
+identifierValueType:
+    name: value
+    required: list
+    description: string
+
+list:
+    delimiter: 
+        - "\n"
+        - ","
+        
