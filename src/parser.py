@@ -46,7 +46,6 @@ def findParseFunc(valueType):
     else:
         return safeParse
 
-
 class parser:
     def __init__(self, settings=None, settingsPath=None):
         self.m_settings = settings if settings is not None else getConfigDictFromFile(settingsPath)
@@ -75,7 +74,7 @@ class parser:
                     logging.error(traceback.format_exc())
                 else:
                     if doc is not None:
-                        for line in doc:
+                        for line in doc.split("\n"):
                             ident, val = self.handleMarkerLine(line, marker)
                     
                             if ident is not None and val is not None:
@@ -84,8 +83,9 @@ class parser:
                     
                     if 'name' not in specDict:
                         specDict['name'] = funcTupl[0]
-                    specDict['funcName'] = funcTupl[0]
+                    specDict['callName'] = funcTupl[0]
                     specDict['args'] = inspect.getargspec(funcTupl[1])[0]
+                    specDict['call'] = funcTupl[1]
                     objs.append(specDict)
         return objs
 
