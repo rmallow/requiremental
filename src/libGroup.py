@@ -19,12 +19,10 @@ class libGroup():
                 libObj = libObject(obj)
             else:
                 libObj = obj
-            
-            if libObj.m_id is None and self.m_library is not None:
-                libObj.m_id = self.m_library.lookupID(libObj)
                 
-            if libObj.m_id is None:
-                logging.warning("object not found in specified library")
+            if libObj.m_module is None or libObj.m_name is None:
+                logging.warning("error creating libObj from obj:")
+                logging.warning(obj)
     
             self.m_objs.append(libObj)
             self.m_sorted = False
@@ -44,3 +42,8 @@ class libGroup():
         for obj in self.m_objs:
             obj.m_id = self.m_library.lookupId(obj)
         self.sort()
+
+    def prettyPrint(self):
+        for obj in self.m_objs:
+            print(str(obj.m_module) + "." + str(obj.m_name))
+            print(obj.m_obj)

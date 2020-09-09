@@ -70,7 +70,8 @@ class parser:
         except Exception:
             logging.error(traceback.format_exc())
         else:
-            moduleDict = {}
+            module = safeGetMoudle(filePath)
+            objSpecs[module] = {}
             for funcTupl in inspect.getmembers(mod, inspect.isfunction):
                 specDict = {}
                 try:
@@ -88,8 +89,7 @@ class parser:
 
                     specDict['args'] = inspect.getargspec(funcTupl[1])[0]
                     specDict['call'] = funcTupl[1]
-                    module[funcTupl[0]] = specDict
-            objSpecs = {safeGetMoudle(filePath), module}
+                    objSpecs[module][funcTupl[0]] = specDict
         return objSpecs
 
     def handleMarkerLine(self, line, marker):

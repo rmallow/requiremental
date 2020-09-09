@@ -7,7 +7,7 @@ def ema(x):
 
 def emaAverage(y, z):
     """
-    @name: emaAvg
+    @name: emaAverage
     @required ema
     @description: basic ema Average function
     """
@@ -17,11 +17,14 @@ def emaAverage(y, z):
 def emaAverageAverage(test):
     """
     @name: emaAvgAvg
-    @required emaAvg
+    @required emaAverage
     @description: basic ema Average Average function
     """
     testString = str(test) + " this is a test"
     return testString
 
 def otherFileFunc():
+    """
+
+    """
     return 42

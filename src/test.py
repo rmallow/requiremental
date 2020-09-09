@@ -13,19 +13,17 @@ def main():
     lib.prettyPrintObjSpecs()
 
     group = libGroup(library=lib)
+    group.insert(testFile2.emaAverageAverage)
     group.insert(testLibrary.testFunc)
     group.insert(testLibrary.moreFunc)
-    """
     group.insert(testLibrary.noDocFunc)
     group.insert(testLibrary.myNameIsTestFunc2)
     group.insert(testLibrary.otherFunc)
     group.insert(testFile2.ema)
     group.insert(testFile2.emaAverage)
-    group.insert(testFile2.emaAverageAverage)
     group.insert(testFile2.otherFileFunc)
-    """
     group.sort()
-    print(group.m_objs)
+    group.prettyPrint()
 
 if __name__ == '__main__':
     main()

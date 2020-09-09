@@ -1,6 +1,6 @@
 def testFunc(x):
     """
-    @required: testFunc2, testFunc3, otherFileFunc
+    @required: otherFileFunc
     """
     return x + 1
 
@@ -17,7 +17,7 @@ def noDocFunc(test):
 
 def myNameIsTestFunc2():
     """
-    @required: multiply
+    @required: moreFunc
     """
     x = 2
 
