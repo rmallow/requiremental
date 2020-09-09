@@ -5,6 +5,10 @@ import inspect
 import traceback
 import yaml
 
+def safeGetMoudle(rawModule):
+    justModule = rawModule.split("/")[-1]
+    return justModule.replace(".py", "")
+
 def getConfigDictFromFile(path):
     if path is not None:
         with open(path) as file:
@@ -58,7 +62,7 @@ class parser:
         return parseFunc(rawValue, settings=self.m_settings.get(vTSafe,None))
 
     def loadFile(self, filePath, marker):
-        objs = []
+        objSpecs = {}
         try:
             spec = importlib.util.spec_from_file_location(filePath, filePath)
             mod = importlib.util.module_from_spec(spec)
@@ -66,6 +70,7 @@ class parser:
         except Exception:
             logging.error(traceback.format_exc())
         else:
+            moduleDict = {}
             for funcTupl in inspect.getmembers(mod, inspect.isfunction):
                 specDict = {}
                 try:
@@ -80,14 +85,12 @@ class parser:
                             if ident is not None and val is not None:
                                 if ident not in specDict:
                                     specDict[ident] = val
-                    
-                    if 'name' not in specDict:
-                        specDict['name'] = funcTupl[0]
-                    specDict['callName'] = funcTupl[0]
+
                     specDict['args'] = inspect.getargspec(funcTupl[1])[0]
                     specDict['call'] = funcTupl[1]
-                    objs.append(specDict)
-        return objs
+                    module[funcTupl[0]] = specDict
+            objSpecs = {safeGetMoudle(filePath), module}
+        return objSpecs
 
     def handleMarkerLine(self, line, marker):
         index = line.find(marker)   #find where marker is if any

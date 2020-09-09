@@ -1,5 +1,9 @@
 from library import library
 from parser import parser
+from libGroup import libGroup
+
+import testLibrary
+import testFile2
 
 def main():
     parse = parser(settingsPath = "src/settings.yml")
@@ -8,6 +12,20 @@ def main():
     lib.loadFile("src/testFile2.py", "@")
     lib.prettyPrintObjSpecs()
 
+    group = libGroup(library=lib)
+    group.insert(testLibrary.testFunc)
+    group.insert(testLibrary.moreFunc)
+    """
+    group.insert(testLibrary.noDocFunc)
+    group.insert(testLibrary.myNameIsTestFunc2)
+    group.insert(testLibrary.otherFunc)
+    group.insert(testFile2.ema)
+    group.insert(testFile2.emaAverage)
+    group.insert(testFile2.emaAverageAverage)
+    group.insert(testFile2.otherFileFunc)
+    """
+    group.sort()
+    print(group.m_objs)
 
 if __name__ == '__main__':
     main()

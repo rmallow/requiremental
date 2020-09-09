@@ -22,3 +22,6 @@ def emaAverageAverage(test):
     """
     testString = str(test) + " this is a test"
     return testString
+
+def otherFileFunc():
+    return 42

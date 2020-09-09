@@ -1,5 +1,4 @@
 identifierValueType:
-    name: value
     required: list
     description: string
 

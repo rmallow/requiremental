@@ -1,13 +1,11 @@
 def testFunc(x):
     """
-    @name: testFunc
-    @required: testFunc2, testFunc3
+    @required: testFunc2, testFunc3, otherFileFunc
     """
     return x + 1
 
 def moreFunc(y, z):
     """
-    @name: multiply
     @description: basic multiplication function
     """
     val = y * z
@@ -16,3 +14,16 @@ def moreFunc(y, z):
 def noDocFunc(test):
     testString = str(test) + " this is a test"
     return testString
+
+def myNameIsTestFunc2():
+    """
+    @required: multiply
+    """
+    x = 2
+
+
+def otherFunc():
+    """
+    @description: i do literally nothing like the rest
+    """
+    return "yo"
