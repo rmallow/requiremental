@@ -39,8 +39,6 @@ class libGroup():
 
     def changeLibrary(self, library):
         self.m_library = library
-        for obj in self.m_objs:
-            obj.m_id = self.m_library.lookupId(obj)
         self.sort()
 
     def prettyPrint(self):

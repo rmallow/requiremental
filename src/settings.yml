@@ -1,6 +1,7 @@
 identifierValueType:
     required: list
     description: string
+    reqCat: list
 
 list:
     delimiter: 

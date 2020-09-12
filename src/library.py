@@ -70,19 +70,3 @@ class library():
  
 
         return newLibObjList
-
-    #do not use?
-    def lookupID(self, libObj):
-        """
-        find match for object in specs, return spec id
-        """
-        for index, objSpec in enumerate(self.m_objSpecs):
-            objModule = parser.safeGetMoudle(libObj.m_obj.__module__)
-            specModule = parser.safeGetMoudle(objSpec['call'].__module__)
-
-            if objModule == specModule and libObj.m_obj.__name__ == objSpec['call'].__name__:
-                if inspect.getsource(libObj.m_obj) == inspect.getsource(objSpec['call']):
-                    return index
-
-        logging.warning("obj not found in library")
-        return None
