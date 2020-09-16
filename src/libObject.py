@@ -7,7 +7,7 @@ class libObject:
         self.m_module = None
         self.m_name = None
         self.m_details = {}
-        self.m_reqs = set()
+        self.m_reqs = {}
         if self.m_obj is not None:
             if obj.__module__ is not None:
                 self.m_module = parser.safeGetMoudle(obj.__module__)

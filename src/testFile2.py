@@ -1,14 +1,14 @@
 def ema(x):
     """
     @name: ema
-    @required: testFunc
+    @requiredFunc: testFunc
     """
     return x + 1
 
 def emaAverage(y, z):
     """
     @name: emaAverage
-    @required ema
+    @requiredFunc ema
     @description: basic ema Average function
     """
     val = y * z
@@ -17,7 +17,7 @@ def emaAverage(y, z):
 def emaAverageAverage(test):
     """
     @name: emaAvgAvg
-    @required emaAverage
+    @requiredFunc emaAverage
     @description: basic ema Average Average function
     """
     testString = str(test) + " this is a test"

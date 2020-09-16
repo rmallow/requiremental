@@ -1,5 +1,5 @@
 identifierValueType:
-    required: list
+    requiredFunc: list
     description: string
     reqCat: list
 

@@ -1,7 +1,20 @@
 import parser
 import libObject
 import logging
-import inspect        
+import inspect
+
+requiredIdentifiers = ['requiredFunc', 'requiredName', 'requiredCategory']
+
+def reqSetDiscard(objToCheck, libObjDiscard):
+    if 'requiredFunc' in objToCheck.m_reqs:
+        objToCheck.m_reqs['requiredFunc'].discard(libObjDiscard.m_name)
+
+    if 'requiredName' in objToCheck.m_reqs and 'name' in libObjDiscard.m_details:
+        objToCheck.m_reqs['requiredName'].discard(libObjDiscard.m_details['name'])
+
+    if 'requiredCategory' in objToCheck.m_reqs and 'category' in libObjDiscard.m_details:
+        objToCheck.m_reqs['requiredCategory'].discard(libObjDiscard.m_details['category'])
+    
 
 class library():
     def __init__(self, parser):
@@ -51,22 +64,26 @@ class library():
             else:
                 if libObj.m_module in self.m_objSpecs and libObj.m_name in self.m_objSpecs[libObj.m_module]:
                     objSpec = self.m_objSpecs[libObj.m_module][libObj.m_name]
-                    if 'required' in objSpec:
-                        libObj.m_reqs.update(objSpec['required'])
+                    for identifier in requiredIdentifiers:
+                        if identifier in objSpec:
+                            if identifier not in libObj.m_reqs:
+                                libObj.m_reqs[identifier] = set()
+                            libObj.m_reqs[identifier].update(objSpec[identifier])
 
         newLibObjList = []
         #using the specificly built object requirements, build the sorted and filtered list
         change = True
         while change:
             change = False
-            for libObj in libObjs[:]:
-                if not libObj.m_reqs:   #check if requirement set is empty
+            for libObj in libObjs[:]:   #if this loop ends with never going inside the if then it will break
+                if all(not reqSet for reqSet in libObj.m_reqs.values()):  #check if requirement set is empty
                     change = True
                     newLibObjList.append(libObj)
                     for obj in libObjs:
                         #remove that item from all requirement sets
-                        obj.m_reqs.discard(libObj.m_name)
+                        reqSetDiscard(obj, libObj)
                     libObjs.remove(libObj)
+                    break  #break here to favor that libObjs were put in, earlier items will always be added if reqs met before later items
  
 
         return newLibObjList
