@@ -18,6 +18,7 @@ def noDocFunc(test):
 def myNameIsTestFunc2():
     """
     @requiredFunc: moreFunc
+    @requiredName: Close
     """
     x = 2
 

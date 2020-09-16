@@ -15,7 +15,7 @@ class libGroup():
     def insert(self, obj):
         if obj is not None:
             libObj = None
-            if obj is not libObject:
+            if not isinstance(obj, libObject):
                 libObj = libObject(obj)
             else:
                 libObj = obj
@@ -44,4 +44,3 @@ class libGroup():
     def prettyPrint(self):
         for obj in self.m_objs:
             print(str(obj.m_module) + "." + str(obj.m_name))
-            print(obj.m_obj)

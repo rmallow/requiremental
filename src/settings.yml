@@ -1,5 +1,7 @@
 identifierValueType:
     requiredFunc: list
+    requiredName: list
+    requiredCategory: list
     description: string
     reqCat: list
 

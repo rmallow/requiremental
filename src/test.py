@@ -1,6 +1,7 @@
 from library import library
 from parser import parser
 from libGroup import libGroup
+from libObject import libObject
 
 import testLibrary
 import testFile2
@@ -18,7 +19,8 @@ def main():
     group.insert(testLibrary.moreFunc)
     group.insert(testLibrary.noDocFunc)
     group.insert(testLibrary.myNameIsTestFunc2)
-    group.insert(testLibrary.otherFunc)
+    testObj = libObject(testLibrary.otherFunc, details= {'name':'Close'})
+    group.insert(testObj)
     group.insert(testFile2.ema)
     group.insert(testFile2.emaAverage)
     group.insert(testFile2.otherFileFunc)

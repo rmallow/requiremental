@@ -3,18 +3,18 @@ import libObject
 import logging
 import inspect
 
+#requiredFunc must be first
 requiredIdentifiers = ['requiredFunc', 'requiredName', 'requiredCategory']
 
 def reqSetDiscard(objToCheck, libObjDiscard):
     if 'requiredFunc' in objToCheck.m_reqs:
         objToCheck.m_reqs['requiredFunc'].discard(libObjDiscard.m_name)
 
-    if 'requiredName' in objToCheck.m_reqs and 'name' in libObjDiscard.m_details:
-        objToCheck.m_reqs['requiredName'].discard(libObjDiscard.m_details['name'])
-
-    if 'requiredCategory' in objToCheck.m_reqs and 'category' in libObjDiscard.m_details:
-        objToCheck.m_reqs['requiredCategory'].discard(libObjDiscard.m_details['category'])
-    
+    #make sure that requyiredFunc is first
+    for identifier in requiredIdentifiers[1:]:
+        noRequired = identifier.replace("required","").lower()
+        if identifier in objToCheck.m_reqs and noRequired in libObjDiscard.m_details:
+            objToCheck.m_reqs[identifier].discard(libObjDiscard.m_details[noRequired])
 
 class library():
     def __init__(self, parser):
@@ -68,7 +68,12 @@ class library():
                         if identifier in objSpec:
                             if identifier not in libObj.m_reqs:
                                 libObj.m_reqs[identifier] = set()
-                            libObj.m_reqs[identifier].update(objSpec[identifier])
+                            req = objSpec[identifier]
+                            if isinstance(req, list):
+                                libObj.m_reqs[identifier].update(req)
+                            elif isinstance(req, str):
+                                libObj.m_reqs[identifier].add(req)
+                                
 
         newLibObjList = []
         #using the specificly built object requirements, build the sorted and filtered list
