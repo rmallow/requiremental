@@ -1,4 +1,7 @@
-import parser
+#local includes
+from . import parser
+
+#external includes
 import collections
 
 class libObject:

@@ -1,17 +1,16 @@
-from library import library
-from parser import parser
-from libGroup import libGroup
-from libObject import libObject
+from requiremental.library import library
+from requiremental.parser import parser
+from requiremental.libGroup import libGroup
+from requiremental.libObject import libObject
 
-import testLibrary
-import testFile2
+import test.testLibrary as testLibrary
+import test.testFile2 as testFile2
 
 def main():
-    parse = parser(settingsPath = "src/settings.yml")
+    parse = parser(settingsPath ="test/settings.yml")
     lib = library(parse)
-    lib.loadFile("src/testLibrary.py", "@")
-    lib.loadFile("src/testFile2.py", "@")
-    lib.prettyPrintObjSpecs()
+    lib.loadFile("test/testLibrary.py")
+    lib.loadFile("test/testFile2.py")
 
     group = libGroup(library=lib)
     group.insert(testFile2.emaAverageAverage)

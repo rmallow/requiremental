@@ -1,5 +1,8 @@
-import library
-from libObject import libObject
+#local includes
+from . import library
+from .libObject import libObject
+
+#external includes
 import logging
 
 """

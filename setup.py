@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from setuptools import setup
+import setuptools
 import io
 import os
 import sys
@@ -26,12 +26,12 @@ with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
 # Load the package's __version__.py
 about = {}
 if not VERSION:
-	with open(os.path.join(here, NAME, '__version__.py')) as f:
+	with open(os.path.join(here, '__version__.py')) as f:
 		exec(f.read(), about)
 else:
 	about['__version__'] = VERSION
 
-setup(
+setuptools.setup(
 	name=NAME,
 	version=about['__version__'],
 	description=DESCRIPTION,
@@ -41,7 +41,7 @@ setup(
 	author_email=EMAIL,
 	python_requires=REQUIRES_PYTHON,
 	url=URL,
-	packages=[NAME],
+	packages=setuptools.find_packages(),
 	install_requires=REQUIRED,
 	license='MIT',
 	classifiers=[

@@ -3,6 +3,7 @@
 **/.DS_Store
 env
 .vscode
+hookScripts
 
 # Distribution / packaging
 .Python

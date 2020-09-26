@@ -1,5 +1,5 @@
-create custom requirements groups for your projects
+create custom requirements groups for your projects using docstring
 
-this project was started for use in algo but was deemed large enough to be separated into it's own project
+see test.py and test files for use case
 
-https://github.com/rmallow/algo
+pip install requiremental==0.0.3

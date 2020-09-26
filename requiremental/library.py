@@ -1,5 +1,8 @@
-import parser
-import libObject
+#local includes
+from . import parser
+from . import libObject
+
+#external includes
 import logging
 import inspect
 
@@ -21,7 +24,7 @@ class library():
         self.m_objSpecs = {}
         self.m_parser = parser
 
-    def loadFile(self, filePath, marker):
+    def loadFile(self, filePath, marker = "@"):
         #add moduleDict to current spec dict
         self.m_objSpecs = {**self.m_objSpecs, **self.m_parser.loadFile(filePath, marker)}
         
