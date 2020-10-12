@@ -1,6 +1,7 @@
 #local includes
 from . import parser
 from . import libObject
+from .parser import parser
 
 #external includes
 import logging
@@ -20,9 +21,13 @@ def reqSetDiscard(objToCheck, libObjDiscard):
             objToCheck.m_reqs[identifier].discard(libObjDiscard.m_details[noRequired])
 
 class library():
-    def __init__(self, parser):
+    def __init__(self, parse=None):
         self.m_objSpecs = {}
-        self.m_parser = parser
+        if parse is None:
+            #loading parser with default settings
+            self.m_parser = parser()
+        else:
+            self.m_parser = parse
 
     def loadFile(self, filePath, marker = "@"):
         #add moduleDict to current spec dict

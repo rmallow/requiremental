@@ -1,5 +1,4 @@
 from requiremental.library import library
-from requiremental.parser import parser
 from requiremental.libGroup import libGroup
 from requiremental.libObject import libObject
 
@@ -7,8 +6,7 @@ import test.testLibrary as testLibrary
 import test.testFile2 as testFile2
 
 def main():
-    parse = parser(settingsPath ="test/settings.yml")
-    lib = library(parse)
+    lib = library()
     lib.loadFile("test/testLibrary.py")
     lib.loadFile("test/testFile2.py")
 

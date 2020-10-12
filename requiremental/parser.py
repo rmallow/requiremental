@@ -55,7 +55,14 @@ def findParseFunc(valueType):
 
 class parser:
     def __init__(self, settings=None, settingsPath=None):
-        self.m_settings = settings if settings is not None else getConfigDictFromFile(settingsPath)
+        if settings is not None:
+            self.m_settings = settings
+        elif settingsPath is not None:
+            self.m_settings = getConfigDictFromFile(settingsPath)
+        else:
+            #load default settings
+            self.m_settings = getConfigDictFromFile("test/settings.yml")
+        
         if self.m_settings is not None and 'identifierValueType' in self.m_settings:
             self.m_valueTypeDict = self.m_settings['identifierValueType']
 
